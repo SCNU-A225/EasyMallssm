@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.ProductDao">
+	<select id="getList" resultType="com.po.Product">
+    	select * from products
+    	<!--  
+    	<where>
+    		<if test="_name != null and _name != ''">
+    			and name like concat('%',#{name,jdbcType=VARCHAR},'%')
+    		</if>
+    		<if test="_category != null and _category != ''">
+    			and category like concat('%',#{category,jdbcType=VARCHAR},'%')
+    		</if>
+    		<if test="_minPrice != null">
+    			and price >= #{minPrice, jdbcType=DOUBLE}
+    		</if>
+    		<if test="_maxPrice != null">
+    			and price <= #{maxPrice, jdbcType=DOUBLE}
+    		</if>
+    	</where>
+    	-->
+	</select>
+	
+	<select id="getAll" resultType="com.po.Product">
+		select * from products
+	</select>
+	
+	<select id="getProduct" parameterType="String" resultType="com.po.Product">
+		select * from products where id = #{pid}
+	</select>
+</mapper>
