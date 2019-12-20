@@ -29,12 +29,13 @@ public class CartController {
 	 * 前台用户登录权限控制，处理方法执行前执行该方法
 	 * @throws UserLoginNoException 
 	 */
-	@ModelAttribute  
-    public void isLogin(HttpSession session) throws UserLoginNoException {      
-       if(session.getAttribute("user") == null){  
-            throw new UserLoginNoException("没有登录");
-       }  
-    } 
+//	@ModelAttribute  
+//    public void isLogin(HttpSession session) throws UserLoginNoException {      
+//       if(session.getAttribute("user") == null){  
+//            throw new UserLoginNoException("没有登录");
+//       }  
+//    } 
+
 	
 	@RequestMapping(value="/addCart", method=RequestMethod.GET)
 	public String add(String buyNum, String pid, HttpSession session, Model model) {
