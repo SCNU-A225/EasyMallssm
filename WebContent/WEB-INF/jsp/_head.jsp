@@ -29,7 +29,7 @@
 		<input type="text" name=""/>
 		<input type="button" value="搜 索"/>
 		<span id="goto">
-			<a id="goto_order" href="#">我的订单</a>
+			<a id="goto_order" href="${pageContext.request.contextPath }/order/toOrder">我的订单</a>
 			<a id="goto_cart" href="${pageContext.request.contextPath }/cart/getCart">我的购物车</a>
 		</span>
 		<img id="erwm" src="${pageContext.request.contextPath}/img/head/qr.jpg"/>
@@ -39,14 +39,14 @@
 			<ul>
 				<li><a href="${ pageContext.request.contextPath }/index/toIndex">首页</a></li>
 				<li><a href="${ pageContext.request.contextPath }/product/getAll">全部商品</a></li>
-				<li><a href="#">手机数码</a></li>
-				<li><a href="#">电脑平板</a></li>
-				<li><a href="#">家用电器</a></li>
-				<li><a href="#">汽车用品</a></li>
-				<li><a href="#">食品饮料</a></li>
-				<li><a href="#">图书杂志</a></li>
-				<li><a href="#">服装服饰</a></li>
-				<li><a href="#">理财产品</a></li>
+				<li><a href="${ pageContext.request.contextPath }/product/getCategory?c=0">手机数码</a></li>
+				<li><a href="${ pageContext.request.contextPath }/product/getCategory?c=1">电脑平板</a></li>
+				<li><a href="${ pageContext.request.contextPath }/product/getCategory?c=2">家用电器</a></li>
+				<li><a href="${ pageContext.request.contextPath }/product/getCategory?c=3">日用百货</a></li>
+				<li><a href="${ pageContext.request.contextPath }/product/getCategory?c=4">食品饮料</a></li>
+				<li><a href="${ pageContext.request.contextPath }/product/getCategory?c=5">图书杂志</a></li>
+				<li><a href="${ pageContext.request.contextPath }/product/getCategory?c=6">服装服饰</a></li>
+				<li><a href="${ pageContext.request.contextPath }/product/getCategory?c=7">床上用品</a></li>
 			</ul>
 		</div>
 	</div>

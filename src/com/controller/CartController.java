@@ -60,6 +60,12 @@ public class CartController {
 	@RequestMapping(value="/getCart", method=RequestMethod.GET)
 	public String getCart(HttpSession session, Model model) {
 		User user = (User)session.getAttribute("user");
+		//判断是否有下单失败的消息
+		String orderMsg = (String)session.getAttribute("orderMsg");
+		if(orderMsg !=null) {
+			model.addAttribute("orderMsg", orderMsg);
+			session.removeAttribute("orderMsg");
+		}
 		List<Cart> cartList = cartService.getCart(user.getId());
 		model.addAttribute("cartList",cartList);
 		return "cart";
@@ -76,4 +82,14 @@ public class CartController {
 	public void deleteById(Integer id) {
 		cartService.deleteById(id);
 	}
+	
+	@RequestMapping(value="/toOrder", method=RequestMethod.GET)
+	public String toOrder(HttpSession session, Model model) {
+		User user = (User)session.getAttribute("user");
+		List<Cart> cartList = cartService.getCart(user.getId());
+		model.addAttribute("cartList",cartList);
+		session.setAttribute("cartList", cartList);
+		return "order_add";
+	}
+	
 }

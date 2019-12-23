@@ -18,4 +18,6 @@ public interface ProductDao {
 	public List<Product> getAll();
 	
 	public Product getProduct(String pid);
+	
+	public List<Product> getCategory(String category);
 }

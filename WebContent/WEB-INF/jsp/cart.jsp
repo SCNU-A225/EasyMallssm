@@ -103,9 +103,22 @@ $(function(){
 			//设置所有商品的总价
 			$("#span_2").text(totalMoney);
 		});
-			
+		
 });	
+
+
+
 </script>	
+<script type="text/javascript" language="javascript">
+
+
+$(window).ready(function(){
+	if(${orderMsg != null}){
+		alert("${orderMsg}")
+	}
+})
+
+</script>
 <body>
 	
 	<%@ include file="_head.jsp" %>
@@ -161,7 +174,7 @@ $(function(){
 					</div>
 				</div>
 				<div id="total_2">	
-					<a id="goto_order" href="${app}/order_add.jsp">去结算</a>
+					<a id="goto_order" href="${pageContext.request.contextPath }/cart/toOrder">去结算</a>
 				</div>
 			</div>
 		</div>

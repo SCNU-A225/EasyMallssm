@@ -9,7 +9,9 @@
 	<script>
 		function add(){
 			var buynum = $("#buyNumInp").val();
-			buynum++;
+			var pnum = ${prod.pnum };
+			if(buynum < pnum)
+				buynum++;
 			$("#buyNumInp").val(buynum);
 		}
 		function del(){
@@ -45,6 +47,7 @@
 					EasyMall 价：
 				<span class="price_red">￥${prod.price }</span>
 				<br/>
+			  库&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;存：${prod.pnum }<br />
 			    运&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;费：满 100 免运费<br />
 			    服&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;务：由EasyMall负责发货，并提供售后服务<br />
 			    购买数量：

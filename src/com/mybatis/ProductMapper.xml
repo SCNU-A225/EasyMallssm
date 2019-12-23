@@ -28,4 +28,8 @@
 	<select id="getProduct" parameterType="String" resultType="com.po.Product">
 		select * from products where id = #{pid}
 	</select>
+	
+	<select id="getCategory" parameterType="String" resultType="com.po.Product">
+		select * from products where category = #{category}
+	</select>
 </mapper>

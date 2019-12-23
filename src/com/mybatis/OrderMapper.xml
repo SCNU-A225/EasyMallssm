@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dao.OrderDao">
+
+	<resultMap type="com.po.OrderItem" id="orderItems">
+		<id property="order_id" column="order_id"/>
+		<id property="product_id" column="product_id"/>
+		<result property="buynum" column="buynum"/>
+		<collection property="product" ofType="com.po.Product">
+			<id property="id" column="product_id"/>
+			<result property="name" column="name"/>
+			<result property="price" column="price"/>
+			<result property="category" column="category"/>
+			<result property="pnum" column="pnum"/>
+			<result property="imgurl" column="imgurl"/>
+			<result property="description" column="description"/>
+		</collection>
+	</resultMap>
+	<select id="findOrderItems" parameterType="String" resultMap="orderItems">
+		select orderitem.*,products.name,products.price,products.category,products.pnum,products.imgurl,products.description
+		from orderitem,products
+		where orderitem.order_id = #{order_id}
+		and orderitem.product_id = products.id
+	</select>
+	
+	<select id="findOrders" parameterType="Integer" resultType="com.po.Order">
+		select * from orders where user_id=#{user_id}
+	</select>
+
+	<insert id="addOrder" parameterType="com.po.Order">
+		insert into orders(id,money,receiverinfo,paystate,user_id) values(#{id},#{money},#{receiverinfo},#{paystate},#{user_id})
+	</insert>
+	
+	<insert id="addOrderItem" parameterType="com.po.OrderItem">
+		insert into orderitem(order_id,product_id,buynum) values(#{order_id},#{product_id},#{buynum})
+	</insert>
+	
+	<delete id="deleteOrderItem" parameterType="String">
+		delete from orderitem where order_id=#{order_id}
+	</delete>
+	
+	<delete id="deleteOrder" parameterType="String">
+		delete from orders where id=#{order_id}
+	</delete>
+
+</mapper>

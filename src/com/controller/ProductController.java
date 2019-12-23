@@ -37,4 +37,15 @@ public class ProductController {
 		model.addAttribute("prod", product);
 		return "prod_info";
 	}
+	
+	/**>手机数码</a></li>>电脑平板</a></li>>家用电器</a></li>汽车用品</a></li>食品饮料</a>图书杂志</a>服装服饰</a>理财产品</a></li>
+	 */
+	@RequestMapping(value = "/getCategory", method=RequestMethod.GET)
+	public String getCategory(String c, Model model) {
+		int num = Integer.parseInt(c);
+		String[] categorys = {"电子数码","电脑平板","家用电器","日用百货","食品饮料","图书杂志","服装服饰","床上用品"};
+		List<Product> list = productService.getCategory(categorys[num]);
+		model.addAttribute("list", list);
+		return "prod_list";
+	}
 }
