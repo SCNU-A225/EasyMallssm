@@ -7,6 +7,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.po.Product;
 import com.service.ProductService;
@@ -17,9 +18,12 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
+	//根据条件查询
 	@RequestMapping(value = "/getList", method = RequestMethod.POST)
-	public String getList(String _name, String _category, Double _minPrice, Double _maxPrice, Model model) {
-		List<Product> list = productService.getList(_name, _category, _minPrice, _maxPrice);
+	public String getList(String name, String category, Double minprice, Double maxprice, Model model) {
+		if(name == null || "".equals(name)) name = null;
+		if(category == null || "".equals(category)) category = null;
+		List<Product> list = productService.getList(name, category, minprice, maxprice);
 		model.addAttribute("list",list);
 		return "prod_list";
 	}
@@ -45,6 +49,14 @@ public class ProductController {
 		int num = Integer.parseInt(c);
 		String[] categorys = {"电子数码","电脑平板","家用电器","日用百货","食品饮料","图书杂志","服装服饰","床上用品"};
 		List<Product> list = productService.getCategory(categorys[num]);
+		model.addAttribute("list", list);
+		return "prod_list";
+	}
+	
+	@RequestMapping(value="/searchByName", method=RequestMethod.POST)
+	public String searchByName(String pname, Model model) {
+		if(pname == null || "".equals(pname)) pname = null;
+		List<Product> list = productService.searchByName(pname);
 		model.addAttribute("list", list);
 		return "prod_list";
 	}

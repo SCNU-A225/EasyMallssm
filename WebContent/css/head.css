@@ -62,6 +62,16 @@ body{
 	cursor: pointer;
 	font-size: 14px;
 }
+#common_head #line2 input[type='submit']{
+	width:70px;
+	height:36px;
+	background-color: #CA141D;
+	border: 1px solid #CA141D;
+	color:white;
+	margin-left:-5px;
+	cursor: pointer;
+	font-size: 14px;
+}
 #common_head #line2 #goto{
 	margin-left: 5px;
 	border: 1px solid #E5E5E5;

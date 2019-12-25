@@ -14,9 +14,9 @@ public class ProductServiceImpl implements ProductService {
 	@Autowired
 	private ProductDao productDao;
 	@Override
-	public List<Product> getList(String _name, String _category, Double _minPrice, Double _maxPrice) {
+	public List<Product> getList(String name, String category, Double minPrice, Double maxPrice) {
 		// TODO Auto-generated method stub
-		return productDao.getList(_name, _category, _minPrice, _maxPrice);
+		return productDao.getList(name, category, minPrice, maxPrice);
 	}
 	@Override
 	public List<Product> getAll() {
@@ -31,6 +31,15 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> getCategory(String category) {
 		return productDao.getCategory(category);
+	}
+	@Override
+	public List<Product> searchByName(String pname) {
+		// TODO Auto-generated method stub
+		return productDao.searchByName(pname);
+	}
+	@Override
+	public void addProduct(Product product) {
+		productDao.addProduct(product);
 	}
 
 }

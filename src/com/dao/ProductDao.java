@@ -11,13 +11,17 @@ import com.po.Product;
 @Repository("productDao")
 @Mapper
 public interface ProductDao {
-	public List<Product> getList(@Param("name") String _name,
-			@Param("category") String _category,
-			@Param("minPrice") Double _minPrice,
-			@Param("maxPrice") Double _maxPrice);
+	public List<Product> getList(@Param("name") String name,
+			@Param("category") String category,
+			@Param("minPrice") Double minPrice,
+			@Param("maxPrice") Double maxPrice);
 	public List<Product> getAll();
 	
 	public Product getProduct(String pid);
 	
 	public List<Product> getCategory(String category);
+	
+	public List<Product> searchByName(String pname);
+	
+	public void addProduct(Product product);
 }

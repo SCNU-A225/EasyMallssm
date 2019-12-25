@@ -96,7 +96,9 @@ public class UserController {
 		User result = userService.login(user);
 		if(result != null) {
 			session.setAttribute("user", result);
-			return "forward:/index.jsp";
+			//如果是管理员登录，进入后台
+			if(user.getUsername().equals("admin")) return "redirect:/admin/login";
+			return "redirect:/index/toIndex";
 		}else {
 			model.addAttribute("msg","用户名或密码错误");
 			return "login";

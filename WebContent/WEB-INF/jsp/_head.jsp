@@ -4,6 +4,8 @@
 <!DOCTYPE HTML>
 <link rel="stylesheet" href="${pageContext.request.contextPath}/css/head.css"/>
 <meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>	
+
 
 <div id="common_head">
 	<div id="line1">
@@ -24,16 +26,18 @@
 </div>
 
 	</div>
+	<form action="${pageContext.request.contextPath }/product/searchByName" method=post>
 	<div id="line2">
 		<img id="logo" src="${pageContext.request.contextPath}/img/head/logo.jpg"/>
-		<input type="text" name=""/>
-		<input type="button" value="搜 索"/>
+		<input id="searchText" type="text" name="pname"/>
+		<input id="searchBtn" type="submit" value="搜 索"/>
 		<span id="goto">
 			<a id="goto_order" href="${pageContext.request.contextPath }/order/toOrder">我的订单</a>
 			<a id="goto_cart" href="${pageContext.request.contextPath }/cart/getCart">我的购物车</a>
 		</span>
 		<img id="erwm" src="${pageContext.request.contextPath}/img/head/qr.jpg"/>
 	</div>
+	</form>
 	<div id="line3">
 		<div id="content">
 			<ul>

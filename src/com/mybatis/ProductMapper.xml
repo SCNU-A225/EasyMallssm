@@ -2,23 +2,21 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dao.ProductDao">
 	<select id="getList" resultType="com.po.Product">
-    	select * from products
-    	<!--  
-    	<where>
-    		<if test="_name != null and _name != ''">
-    			and name like concat('%',#{name,jdbcType=VARCHAR},'%')
+    	select * from products where 1=1
+
+    		<if test="name != null">
+    			and name like concat('%',#{name},'%')
     		</if>
-    		<if test="_category != null and _category != ''">
-    			and category like concat('%',#{category,jdbcType=VARCHAR},'%')
+    		<if test="category != null">
+    			and category like concat('%',#{category},'%')
     		</if>
-    		<if test="_minPrice != null">
-    			and price >= #{minPrice, jdbcType=DOUBLE}
+    		<if test="minPrice != null">
+    			and price &gt; #{minPrice}
     		</if>
-    		<if test="_maxPrice != null">
-    			and price <= #{maxPrice, jdbcType=DOUBLE}
+    		<if test="maxPrice != null">
+    			and price &lt; #{maxPrice}
     		</if>
-    	</where>
-    	-->
+
 	</select>
 	
 	<select id="getAll" resultType="com.po.Product">
@@ -32,4 +30,15 @@
 	<select id="getCategory" parameterType="String" resultType="com.po.Product">
 		select * from products where category = #{category}
 	</select>
+	
+	<select id="searchByName" parameterType="String" resultType="com.po.Product">
+		select * from products where 1=1 
+		<if test="pname != null">
+			and name like concat('%',#{pname},'%')
+		</if>
+	</select>
+	
+	<insert id="addProduct" parameterType="com.po.Product">
+		insert into products values(#{id},#{name},#{price},#{category},#{pnum},#{imgurl},#{description})
+	</insert>
 </mapper>
