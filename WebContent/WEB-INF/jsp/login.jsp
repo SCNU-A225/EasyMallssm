@@ -27,7 +27,14 @@
 					<td colspan="2" style="text-align:center">
 						<input type="submit" value="登 陆"/>
 					</td>
-					<td><a href="${pageContext.request.contextPath}/index/register">去注册</a></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align:center">
+						<a href="${pageContext.request.contextPath}/manage/tologin">管理员登录</a>
+					</td>
+					<td colspan="2" style="text-align:center">
+						<a href="${pageContext.request.contextPath}/index/register">去注册</a>
+					</td>
 				</tr>
 					<tr>
 					<td colspan="2" style="text-align:center">${msg}</td>
