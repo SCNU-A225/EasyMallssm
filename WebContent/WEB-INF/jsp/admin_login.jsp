@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE HTML>
 <html  class="x-admin-sm">
 <head>
-	<title>EasyMall登陆</title>
-	<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+	<title>EasyMall后台</title>
+	<meta charset="UTF-8">
 	<meta name="renderer" content="webkit|ie-comp|ie-stand">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
@@ -22,7 +22,7 @@
         <div class="message">EasyMall后台登陆</div>
         <div id="darkbannerwrap"></div>
         
-        <form class="layui-form" action="${pageContext.request.contextPath}/manage/login" method="POST">
+        <form class="layui-form" action="${pageContext.request.contextPath}/admin/login" method="POST">
             <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
             <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">

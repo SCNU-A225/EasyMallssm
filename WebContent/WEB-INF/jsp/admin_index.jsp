@@ -70,10 +70,9 @@
             <div id="side-nav">
                 <ul id="nav">
                 	<li>
-                        <a href="javascript:;">
+                        <a onclick="xadmin.add_tab('欢迎页','welcome.html">
                             <i class="iconfont left-nav-li" lay-tips="欢迎页">&#xe6b4;</i>
                             <cite>欢迎页</cite>
-                            <i class="iconfont nav_right">&#xe697;</i>
                         </a>
                     </li>
                     <li>
@@ -106,9 +105,9 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('订单列表','order-list.html')">
+                                <a onclick="xadmin.add_tab('商品列表','${pageContext.request.contextPath}/admin/product/list')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>订单列表</cite></a>
+                                    <cite>商品列表</cite></a>
                             </li>
                             <li>
                                 <a onclick="xadmin.add_tab('订单列表1','order-list1.html')">
