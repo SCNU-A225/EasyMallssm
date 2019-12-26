@@ -17,4 +17,5 @@ public interface OrderDao {
 	public List<OrderItem> findOrderItems(String order_id);
 	public void deleteOrderItem(String order_id);
 	public void deleteOrder(String order_id);
+	public List<Order> getAllOrders();
 }

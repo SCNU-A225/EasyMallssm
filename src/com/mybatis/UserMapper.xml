@@ -23,4 +23,14 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="login" parameterType="com.po.User" resultType="com.po.User">
 		select * from user where username=#{username} and password=#{password}
 	</select>
+	
+	<!-- 管理员登录 -->
+	<select id="adminlogin" parameterType="com.po.User" resultType="com.po.User">
+		select * from user where username=#{username} and password=#{password} and nickname='超级管理员'
+	</select>
+	
+	<!-- 获取用户列表 -->
+	<select id="getUserList" resultType="com.po.User">
+		select * from user
+	</select>
 </mapper>

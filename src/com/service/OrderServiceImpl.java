@@ -45,11 +45,31 @@ public class OrderServiceImpl implements OrderService{
 			return null;
 		}
 	}
+	
 
 	@Override
 	public void deleteOrder(String order_id) {
 		orderDao.deleteOrderItem(order_id);
 		orderDao.deleteOrder(order_id);
+	}
+
+	@Override
+	public List<OrderInfo> getAllOrderInfo() {
+		List<OrderInfo> orderInfos = new ArrayList<OrderInfo>();
+		List<Order> orders = orderDao.getAllOrders();
+		for(int i = 0; i < orders.size(); i++) {
+			OrderInfo orderInfo = new OrderInfo();
+			Order order = orders.get(i);
+			List<OrderItem> orderItems = orderDao.findOrderItems(order.getId());
+			orderInfo.setOrder(order);
+			orderInfo.setList(orderItems);
+			orderInfos.add(orderInfo);
+		}
+		if(orderInfos.size() > 0) {
+			return orderInfos;
+		}else {
+			return null;
+		}
 	}
 
 }

@@ -26,6 +26,10 @@
 	<select id="findOrders" parameterType="Integer" resultType="com.po.Order">
 		select * from orders where user_id=#{user_id}
 	</select>
+	
+	<select id="getAllOrders" resultType="com.po.Order">
+		select * from orders
+	</select>
 
 	<insert id="addOrder" parameterType="com.po.Order">
 		insert into orders(id,money,receiverinfo,paystate,user_id) values(#{id},#{money},#{receiverinfo},#{paystate},#{user_id})
