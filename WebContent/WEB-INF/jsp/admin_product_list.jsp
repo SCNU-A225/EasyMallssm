@@ -1,4 +1,7 @@
-﻿<!DOCTYPE html>
+﻿<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<!DOCTYPE html>
 <html class="x-admin-sm">
     
     <head>
@@ -55,107 +58,17 @@
                             <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
                                 <i class="layui-icon"></i>添加</button></div>
                         <div class="layui-card-body ">
-                            <table class="layui-table layui-form">
-                                <thead>
-                                    <tr>
-                                        <th>
-                                            <input type="checkbox" name="" lay-skin="primary">
-                                        </th>
-                                        <th>订单编号</th>
-                                        <th>收货人</th>
-                                        <th>总金额</th>
-                                        <th>应付金额</th>
-                                        <th>订单状态</th>
-                                        <th>支付状态</th>
-                                        <th>发货状态</th>
-                                        <th>支付方式</th>
-                                        <th>配送方式</th>
-                                        <th>下单时间</th>
-                                        <th>操作</th></tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" lay-skin="primary"></td>
-                                        <td>2017009171822298053</td>
-                                        <td>老王:18925139194</td>
-                                        <td>7829.10</td>
-                                        <td>7854.10</td>
-                                        <td>待确认</td>
-                                        <td>未支付</td>
-                                        <td>未发货</td>
-                                        <td>其他方式</td>
-                                        <td>申通物流</td>
-                                        <td>2017-08-17 18:22</td>
-                                        <td class="td-manage">
-                                            <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
-                                                <i class="layui-icon">&#xe63c;</i></a>
-                                            <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                                <i class="layui-icon">&#xe640;</i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" lay-skin="primary"></td>
-                                        <td>2017009171822298053</td>
-                                        <td>老王:18925139194</td>
-                                        <td>7829.10</td>
-                                        <td>7854.10</td>
-                                        <td>待确认</td>
-                                        <td>未支付</td>
-                                        <td>未发货</td>
-                                        <td>其他方式</td>
-                                        <td>申通物流</td>
-                                        <td>2017-08-17 18:22</td>
-                                        <td class="td-manage">
-                                            <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
-                                                <i class="layui-icon">&#xe63c;</i></a>
-                                            <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                                <i class="layui-icon">&#xe640;</i></a>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <input type="checkbox" name="" lay-skin="primary"></td>
-                                        <td>2017009171822298053</td>
-                                        <td>老王:18925139194</td>
-                                        <td>7829.10</td>
-                                        <td>7854.10</td>
-                                        <td>待确认</td>
-                                        <td>未支付</td>
-                                        <td>未发货</td>
-                                        <td>其他方式</td>
-                                        <td>申通物流</td>
-                                        <td>2017-08-17 18:22</td>
-                                        <td class="td-manage">
-                                            <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
-                                                <i class="layui-icon">&#xe63c;</i></a>
-                                            <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
-                                                <i class="layui-icon">&#xe640;</i></a>
-                                        </td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div class="layui-card-body ">
-                            <div class="page">
-                                <div>
-                                    <a class="prev" href="">&lt;&lt;</a>
-                                    <a class="num" href="">1</a>
-                                    <span class="current">2</span>
-                                    <a class="num" href="">3</a>
-                                    <a class="num" href="">489</a>
-                                    <a class="next" href="">&gt;&gt;</a></div>
-                            </div>
+                            <table id="productTable" class="layui-table layui-form"></table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </body>
-    <script>layui.use(['laydate', 'form'],
+    <script>layui.use(['laydate', 'form', 'table'],
         function() {
             var laydate = layui.laydate;
+            var table = layui.table;
 
             //执行一个laydate实例
             laydate.render({
@@ -165,6 +78,22 @@
             //执行一个laydate实例
             laydate.render({
                 elem: '#end' //指定元素
+            });
+            
+            table.render({
+                elem: '#productTable'
+                ,cellMinWidth: 80 //全局定义常规单元格的最小宽度，layui 2.2.1 新增
+                ,cols: [[
+                    {field:'id', title: '商品ID'}
+                    ,{field:'name', title: '商品名'} //width 支持：数字、百分比和不填写。你还可以通过 minWidth 参数局部定义当前单元格的最小宽度，layui 2.2.1 新增
+                    ,{field:'price', title: '价格', sort: true}
+                    ,{field:'category', title: '商品分类'}
+                    ,{field:'pnum', title: '数量'}
+                    ,{field:'description', title: '描述'}
+                ]]
+                ,data: "${list}"
+                ,page: true
+                ,even: true
             });
         });
 
@@ -224,6 +153,40 @@
                 });
                 $(".layui-form-checked").not('.header').parents('tr').remove();
             });
-        }</script>
-
+        }
+        /*
+        <thead>
+           <tr>
+               <th>
+                   <input type="checkbox" name="" lay-skin="primary">
+               </th>
+               <th>商品ID</th>
+               <th>名称</th>
+               <th>价格</th>
+               <th>类别</th>
+               <th>数量</th>
+               <th>描述</th>
+               <th>操作</th></tr>
+       </thead>
+       <tbody>
+           <tr>
+               <td>
+                   <input type="checkbox" name="" lay-skin="primary"></td>
+               <td>05e20c1a-0401-4c0a-82ab-6fb0f37db397</td>
+               <td>靳老师别墅</td>
+               <td>9000000</td>
+               <td>电子数码</td>
+               <td>206</td>
+               <td>贵族的生活，美女很多</td>
+               <td class="td-manage">
+                   <a title="查看" onclick="xadmin.open('编辑','order-view.html')" href="javascript:;">
+                       <i class="layui-icon">&#xe63c;</i>查看</a>
+                   <a title="删除" onclick="member_del(this,'要删除的id')" href="javascript:;">
+                       <i class="layui-icon">&#xe640;</i>删除</a>
+               </td>
+           </tr>
+           
+       </tbody>
+        */
+        </script>
 </html>
