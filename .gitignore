@@ -25,3 +25,5 @@ hs_err_pid*
 src/jdbc.properties
 
 build/*
+/.classpath
+/.settings/*
