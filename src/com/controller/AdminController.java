@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.google.gson.Gson;
 import com.po.OrderInfo;
 import com.po.Product;
 import com.po.User;
@@ -18,6 +19,7 @@ import com.service.UserService;
 @Controller("adminController")
 @RequestMapping("/admin")
 public class AdminController {
+	private Gson gson = new Gson();
 	
 	@Autowired
 	private UserService userService; 
@@ -58,7 +60,8 @@ public class AdminController {
 	@RequestMapping(value="/product/list", method=RequestMethod.GET )
 	public String productList(Model model) {
 		List<Product> prodlist = productService.getAll();
-		model.addAttribute("prodlist", prodlist);
+		String data = gson.toJson(prodlist);
+		model.addAttribute("prodlist", data);
 		return "admin_product_list";
 	}
 	
