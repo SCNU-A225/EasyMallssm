@@ -105,7 +105,7 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('商品列表','${pageContext.request.contextPath}/admin/product/list')">
+                                <a onclick="xadmin.add_tab('商品列表','${pageContext.request.contextPath}/admin/prodlist')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>商品列表</cite></a>
                             </li>

@@ -1,10 +1,12 @@
 package com.controller;
 
 import java.io.File;
+import java.io.IOException;
 import java.util.List;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -49,6 +51,11 @@ public class AdminController {
 		return "admin_index";
 	}
 	
+	@RequestMapping(value="/toprodadd")
+	public String toProductUpdate() {
+		return "admin_product_add";
+	}
+	
 	//管理员登录
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(String username, String password) {
@@ -91,16 +98,20 @@ public class AdminController {
 	//上传图片，返回存储路径
 	@RequestMapping(value="/uploadimg",method=RequestMethod.POST)
 	@ResponseBody
-	public String uploadimg(@RequestParam(value="img", required = true) MultipartFile img, HttpServletRequest request) {
+	public String uploadimg(@RequestParam(value="file", required = true) MultipartFile file, HttpServletRequest request) {
 		String pathString = request.getServletContext().getRealPath("/");
-		String realpath = pathString.substring(0, pathString.indexOf(".metadata")) + "EasyMallssm\\WebContent\\upload";
-		String fileName = img.getOriginalFilename();
+		System.out.println(pathString);
+		String realpath = pathString + "upload\\new";
+		System.out.println(realpath);
+		String fileName = file.getOriginalFilename();
+		System.out.println(fileName);
 		File targetFile = new File(realpath, fileName);
+		System.out.println(targetFile);
 		if(!targetFile.exists()) {
 			targetFile.mkdirs();
 		}
 		try {
-			img.transferTo(targetFile);
+			file.transferTo(targetFile);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -109,10 +120,15 @@ public class AdminController {
 	
 	//添加商品
 	@RequestMapping(value="/addproduct",method=RequestMethod.POST)
-	public void addProduct(Product product) {
+	public void addProduct(Product product,HttpServletResponse response) {
 		String id = UUID.randomUUID().toString();
 		product.setId(id);
 		productService.addProduct(product);
+		try {
+			response.getOutputStream().print("ok");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	//删除商品
@@ -123,7 +139,12 @@ public class AdminController {
 	
 	//更新商品
 	@RequestMapping(value="/updateprod",method=RequestMethod.POST)
-	public void updateProd(Product product) {
+	public void updateProd(Product product,HttpServletResponse response) {
 		productService.updateProd(product);
+		try {
+			response.getOutputStream().print("ok");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

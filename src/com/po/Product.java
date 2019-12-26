@@ -54,6 +54,11 @@ public class Product {
 	}
 	
 	@Override
+	public String toString() {
+		return "Product [id=" + id + ", name=" + name + ", price=" + price + ", category=" + category + ", imgurl="
+				+ imgurl + ", pnum=" + pnum + ", description=" + description + "]";
+	}
+	@Override
 	public int hashCode() {
 		// TODO Auto-generated method stub
 		return id == null?0:id.hashCode();
