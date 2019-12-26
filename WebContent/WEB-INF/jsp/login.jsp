@@ -30,7 +30,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" style="text-align:center">
-						<a href="${pageContext.request.contextPath}/manage/tologin">管理员登录</a>
+						<a href="${pageContext.request.contextPath}/admin/tologin">管理员登录</a>
 					</td>
 					<td colspan="2" style="text-align:center">
 						<a href="${pageContext.request.contextPath}/index/register">去注册</a>
