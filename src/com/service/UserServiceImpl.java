@@ -1,6 +1,8 @@
 package com.service;
 
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,5 +26,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(User user) {
 		return userDao.login(user);
+	}
+	@Override
+	public User adminlogin(User user) {
+		return userDao.adminlogin(user);
+	}
+	@Override
+	public List<User> getUserList() {
+		return userDao.getUserList();
 	}
 }

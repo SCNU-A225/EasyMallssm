@@ -1,6 +1,8 @@
 package com.dao;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -15,4 +17,7 @@ public interface UserDao {
 	
 	public User login(User user);
 		
+	public User adminlogin(User user);
+	
+	public List<User> getUserList();
 }
