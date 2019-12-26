@@ -1,17 +1,16 @@
-<!doctype html>
+﻿<!doctype html>
 <html class="x-admin-sm">
     <head>
         <meta charset="UTF-8">
-        <title>后台登录-X-admin2.2</title>
+        <title>EasyMall后台</title>
         <meta name="renderer" content="webkit|ie-comp|ie-stand">
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
         <meta name="viewport" content="width=device-width,user-scalable=yes, minimum-scale=0.4, initial-scale=0.8,target-densitydpi=low-dpi" />
         <meta http-equiv="Cache-Control" content="no-siteapp" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/font.css">
         <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/xadmin.css">
-        <!-- <link rel="stylesheet" href="./css/theme5.css"> -->
         <script src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
-        <script type="text/javascript" src="${pageContext.request.contextPath}/js/admin/xadmin.js"></script>
+        <script type="text/javascript" src="${pageContext.request.contextPath}/js/xadmin.js"></script>
         <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
         <!--[if lt IE 9]>
           <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -26,7 +25,7 @@
         <!-- 顶部开始 -->
         <div class="container">
             <div class="logo">
-                <a href="./index.html">X-admin v2.2</a></div>
+                <a href="./index.html">EasyMall Admin</a></div>
             <div class="left_open">
                 <a><i title="展开左侧栏" class="iconfont">&#xe699;</i></a>
             </div>
@@ -78,7 +77,7 @@
                 <ul id="nav">
                     <li>
                         <a href="javascript:;">
-                            <i class="iconfont left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
+                            <i class="layui-icon left-nav-li" lay-tips="会员管理">&#xe6b8;</i>
                             <cite>会员管理</cite>
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">

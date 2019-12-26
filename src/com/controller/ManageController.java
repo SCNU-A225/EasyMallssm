@@ -10,8 +10,16 @@ public class ManageController {
 	
 	@RequestMapping(value="/tologin", method=RequestMethod.GET)
 	public String toLogin() {
-		return "mlogin";
+		return "admin_login";
 	}
 	
+	@RequestMapping(value = "/admin")
+	public String toAdmin(){
+		return "admin";
+	}
 	
+	@RequestMapping(value="/login", method=RequestMethod.POST)
+	public String login() {
+		return "redirect:/manage/admin";
+	}
 }
