@@ -4,7 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-@Controller("manageController")
+@Controller("adminController")
 @RequestMapping("/admin")
 public class AdminController {
 	
@@ -13,14 +13,18 @@ public class AdminController {
 		return "admin_login";
 	}
 	
-	@RequestMapping(value = "/admin")
-	public String admin(){
-		return "admin";
+	@RequestMapping(value = "/index")
+	public String index(){
+		return "admin_index";
 	}
 	
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login() {
-		return "redirect:/manage/admin";
+		return "redirect:/admin/index";
+	}
+	
+	@RequestMapping(value="/product/list")
+	public String productList() {
+		return "admin_product_list";
 	}
 }
-
