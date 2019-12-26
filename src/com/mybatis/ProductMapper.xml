@@ -41,4 +41,12 @@
 	<insert id="addProduct" parameterType="com.po.Product">
 		insert into products values(#{id},#{name},#{price},#{category},#{pnum},#{imgurl},#{description})
 	</insert>
+	
+	<delete id="delProduct" parameterType="String">
+		delete from products where id=#{id}
+	</delete>
+	
+	<update id="updateProd" parameterType="com.po.Product">
+		update products set name=#{name}, price=#{price}, category=#{category}, pnum=#{pnum}, imgurl=#{imgurl}, description=#{description} where id=#{id}
+	</update>
 </mapper>
