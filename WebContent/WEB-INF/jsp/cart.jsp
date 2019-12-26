@@ -110,8 +110,6 @@ $(function(){
 
 </script>	
 <script type="text/javascript" language="javascript">
-
-
 $(window).ready(function(){
 	if(${orderMsg != null}){
 		alert("${orderMsg}")

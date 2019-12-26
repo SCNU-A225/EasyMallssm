@@ -14,7 +14,7 @@ public class ManageController {
 	}
 	
 	@RequestMapping(value = "/admin")
-	public String toAdmin(){
+	public String admin(){
 		return "admin";
 	}
 	
