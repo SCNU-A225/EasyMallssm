@@ -24,4 +24,8 @@ public interface ProductDao {
 	public List<Product> searchByName(String pname);
 	
 	public void addProduct(Product product);
+	
+	public void delProduct(String id);
+	
+	public void updateProd(Product product);
 }
