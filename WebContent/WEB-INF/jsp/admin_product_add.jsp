@@ -38,7 +38,7 @@
                     <label for="name" class="layui-form-label"><span class="x-red">*</span>分类</label>
                     <div class="layui-input-block">
 				      <select name="category">
-                           <option value="其他"></option>
+                           <option value="其他">其他</option>
                            <option value="电子数码">电子数码</option>
                            <option value="日用百货">日用百货</option>
                            <option value="服装服饰">服装服饰</option>
@@ -110,7 +110,6 @@
                             data: $('#productForm').serialize(),
                             success: function (res) {
                                 res = JSON.parse(res)
-                                console.log(res);//打印服务端返回的数据(调试用)
                                 if (res.code == 200) {
                                     layer.alert("增加成功", {icon: 1},
                                         function () {
@@ -119,6 +118,8 @@
                                             //关闭当前frame
                                             parent.layer.close(index);
                                     });
+                                } else {
+                                	layer.alert("增加失败", {icon: 2});
                                 }
                             },
                             error : function() {

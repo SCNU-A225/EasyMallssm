@@ -111,18 +111,18 @@
             table.on('edit(productTable)', function(obj){
                 var data = obj.data;
                 $.ajax({
-                        method:'POST',
-                        url:`${pageContext.request.contextPath}/admin/updateprod`,
-                        data:data,
-                        success:function(data,msg,xhr){
-                            
-                        },
-                        error:function(xhr,err){
-                        	alert("修改失败")
-                            console.log(xhr)
-                            console.log(err)
-                        }
-                    })
+                    method:'POST',
+                    url:`${pageContext.request.contextPath}/admin/updateprod`,
+                    data:data,
+                    success:function(data,msg,xhr){
+                        
+                    },
+                    error:function(xhr,err){
+                    	alert("修改失败")
+                        console.log(xhr)
+                        console.log(err)
+                    }
+                })
             });
 
         });
@@ -131,12 +131,26 @@
         function product_del(obj, id) {
             layer.confirm('确认要删除吗？',
             function(index) {
-                //发异步删除数据
-                obj.del();
-                layer.msg('已删除!', {
-                    icon: 1,
-                    time: 1000
-                });
+            	$.ajax({
+                    method:'POST',
+                    url:`${pageContext.request.contextPath}/admin/delproduct`,
+                    data:`id=${id}`,
+                    success:function(res){
+                    	res = JSON.parse(res)
+                    	if(res.code==200){
+                    		obj.del();
+                        	layer.msg('已删除!', {
+                                icon: 1,
+                                time: 1000
+                            });
+                    	} else {
+                    		layer.alert("删除失败", {icon: 2});
+                    	}
+                    },
+                    error:function(xhr,err){
+                    	layer.alert("删除失败", {icon: 2});
+                    }
+                })
             });
         }
 

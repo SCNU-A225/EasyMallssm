@@ -156,8 +156,10 @@ public class AdminController {
 	
 	//删除商品
 	@RequestMapping(value="/delproduct",method=RequestMethod.POST)
-	public void delProduct(String id) {
+	@ResponseBody
+	public String delProduct(String id) {
 		productService.delProduct(id);
+		return "{\"code\":200}";
 	}
 	
 	//更新商品
