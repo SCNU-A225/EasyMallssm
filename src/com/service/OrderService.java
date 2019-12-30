@@ -12,4 +12,5 @@ public interface OrderService {
 	public List<OrderInfo> findOrders(Integer user_id);
 	public void deleteOrder(String order_id);
 	public List<OrderInfo> getAllOrderInfo();
+	public List<Order> getAllOrders();
 }

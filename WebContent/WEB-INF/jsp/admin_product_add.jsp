@@ -25,7 +25,7 @@
 <body>
     <div class="layui-fluid">
         <div class="layui-row">
-            <form class="layui-form layui-form-pane">
+            <form class="layui-form layui-form-pane" id="productForm">
                 <div class="layui-form-item">
                     <label for="name" class="layui-form-label"><span class="x-red">*</span>商品名</label>
                     <div class="layui-input-block"><input type="text" id="name" name="name" required="" lay-verify="required" class="layui-input"></div>
@@ -38,7 +38,7 @@
                     <label for="name" class="layui-form-label"><span class="x-red">*</span>分类</label>
                     <div class="layui-input-block">
 				      <select name="category">
-                           <option value=""></option>
+                           <option value="其他"></option>
                            <option value="电子数码">电子数码</option>
                            <option value="日用百货">日用百货</option>
                            <option value="服装服饰">服装服饰</option>
@@ -50,7 +50,7 @@
                 </div>
                 <div class="layui-form-item">
                     <label for="pnum" class="layui-form-label"><span class="x-red">*</span>数量</label>
-                    <div class="layui-input-block"><input type="number" id="pnum" name="pnum" required="" lay-verify="number" class="layui-input"></div>
+                    <div class="layui-input-block"><input type="number" id="pnum" name="pnum" min="0" required="" lay-verify="number" class="layui-input"></div>
                 </div>
                 <div class="layui-form-item layui-form-text">
                     <label for="description" class="layui-form-label"><span class="x-red">*</span>描述</label>
@@ -65,12 +65,13 @@
                         <i class="layui-icon"></i>
                         <p>点击上传，或将文件拖拽到此处</p>
                     </div>
+                    <input type="text" name="imgurl" id="imgurl" class="layui-hide" />
 				</div> 
                 </div>
                 	
                 <div class="layui-form-item">
                     <div class="layui-input-block">
-                        <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                        <button class="layui-btn" lay-submit lay-filter="send">立即提交</button>
                         <button type="reset" class="layui-btn layui-btn-primary">重置</button>
                     </div>
                 </div>
@@ -101,18 +102,28 @@
                 });
 
                 //监听提交
-                form.on('submit(add)',
+                form.on('submit(send)',
                     function (data) {
-                        console.log(data);
-                        //发异步，把数据提交给php
-                        layer.alert("增加成功", {
-                            icon: 6
-                        },
-                        function () {
-                            // 获得frame索引
-                            var index = parent.layer.getFrameIndex(window.name);
-                            //关闭当前frame
-                            parent.layer.close(index);
+                        $.ajax({
+                            type: "POST",
+                            url: "${pageContext.request.contextPath}/admin/addproduct" ,
+                            data: $('#productForm').serialize(),
+                            success: function (res) {
+                                res = JSON.parse(res)
+                                console.log(res);//打印服务端返回的数据(调试用)
+                                if (res.code == 200) {
+                                    layer.alert("增加成功", {icon: 1},
+                                        function () {
+                                            // 获得frame索引
+                                            var index = parent.layer.getFrameIndex(window.name);
+                                            //关闭当前frame
+                                            parent.layer.close(index);
+                                    });
+                                }
+                            },
+                            error : function() {
+                                layer.alert("增加失败", {icon: 2});
+                            }
                         });
                     return false;
                 });
@@ -127,7 +138,12 @@
                	      });
                	    }
                     ,done: function(res){
-                    	console.log(res)
+                    	if(res.code==200){
+                    		layer.msg('图片上传成功！');
+                    		$("#imgurl").val(res.url);
+                    	} else {
+                    		layer.msg('图片上传失败，请重新上传！');
+                    	}
                     }
                 });
             });

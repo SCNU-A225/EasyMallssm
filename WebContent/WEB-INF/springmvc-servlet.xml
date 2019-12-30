@@ -37,7 +37,7 @@
 	class="org.springframework.web.multipart.commons.CommonsMultipartResolver"
 	p:defaultEncoding="UTF-8"
 	p:maxUploadSize="5400000"
-	p:uploadTempDir="fileUpload/temp">
+	p:uploadTempDir="upload/temp">
 	</bean>
 	
 	<mvc:interceptors>

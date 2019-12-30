@@ -54,10 +54,10 @@
             </ul>
             <ul class="layui-nav right" lay-filter="">
                 <li class="layui-nav-item">
-                    <a href="javascript:;">admin</a>
+                    <a href="javascript:;">${sessionScope.user.username}</a>
                     <dl class="layui-nav-child">
-                        <dd><a href="${pageContext.request.contextPath}/manage/tologin">切换账号</a></dd>
-                        <dd><a href="${pageContext.request.contextPath}/manage/tologin">退出</a></dd>
+                        <dd><a href="${pageContext.request.contextPath}/admin/tologin">切换账号</a></dd>
+                        <dd><a href="${pageContext.request.contextPath}/admin/exit">退出</a></dd>
                     </dl>
                 </li>
                 <li class="layui-nav-item to-index"><a href="${pageContext.request.contextPath}">前台首页</a></li>
@@ -82,19 +82,9 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('会员列表(静态表格)','member-list.html')">
+                                <a onclick="xadmin.add_tab('用户列表','member-list.html')">
                                     <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员列表(静态表格)</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('会员列表(动态表格)','member-list1.html',true)">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员列表(动态表格)</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('会员删除','member-del.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>会员删除</cite></a>
+                                    <cite>用户列表</cite></a>
                             </li>
                         </ul>
                     </li>
@@ -109,11 +99,6 @@
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>商品列表</cite></a>
                             </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('订单列表1','order-list1.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>订单列表1</cite></a>
-                            </li>
                         </ul>
                     </li>
                     <li>
@@ -126,11 +111,6 @@
                                 <a onclick="xadmin.add_tab('订单列表','order-list.html')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>订单列表</cite></a>
-                            </li>
-                            <li>
-                                <a onclick="xadmin.add_tab('订单列表1','order-list1.html')">
-                                    <i class="iconfont">&#xe6a7;</i>
-                                    <cite>订单列表1</cite></a>
                             </li>
                         </ul>
                     </li>
@@ -196,7 +176,7 @@
                 </div>
                 <div class="layui-tab-content">
                     <div class="layui-tab-item layui-show">
-                        <iframe src='./welcome.html' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                        <iframe src='${pageContext.request.contextPath}/admin/welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
                     </div>
                 </div>
                 <div id="tab_show"></div>
