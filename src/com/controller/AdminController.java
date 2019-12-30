@@ -157,7 +157,8 @@ public class AdminController {
 	//É¾³ýÉÌÆ·
 	@RequestMapping(value="/delproduct",method=RequestMethod.POST)
 	@ResponseBody
-	public String delProduct(String id) {
+	public String delProduct(@RequestParam String id) {
+		System.out.println(id);
 		productService.delProduct(id);
 		return "{\"code\":200}";
 	}
