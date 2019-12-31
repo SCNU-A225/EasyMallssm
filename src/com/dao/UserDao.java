@@ -20,4 +20,6 @@ public interface UserDao {
 	public User adminlogin(User user);
 	
 	public List<User> getUserList();
+	
+	public String getUserName(Integer id);
 }
