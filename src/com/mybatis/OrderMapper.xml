@@ -27,6 +27,10 @@
 		select * from orders where user_id=#{user_id}
 	</select>
 	
+	<select id="getOrderById" parameterType="String" resultType="com.po.Order">
+		select * from orders where id=#{order_id}
+	</select>
+	
 	<select id="getAllOrders" resultType="com.po.Order">
 		select * from orders
 	</select>
@@ -46,5 +50,9 @@
 	<delete id="deleteOrder" parameterType="String">
 		delete from orders where id=#{order_id}
 	</delete>
+	
+	<update id="updatePayState" >
+		update orders set paystate = #{paystate} where id=#{id}
+	</update>
 
 </mapper>

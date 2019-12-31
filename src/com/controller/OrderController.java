@@ -37,7 +37,7 @@ public class OrderController {
 	public String addOrder(String receiverinfo, HttpSession session, Model model) {
 		String id = UUID.randomUUID().toString();
 		double money = 0;
-		int paystate = 0;//0±íÊ¾Î´Ö§¸¶
+		int paystate = 0;//0è¡¨ç¤ºæœªæ”¯ä»˜
 		User user = (User)session.getAttribute("user");
 		int user_id = user.getId();
 		List<Cart> cartList = (List<Cart>)session.getAttribute("cartList");
@@ -45,9 +45,9 @@ public class OrderController {
 			OrderItem orderItem = new OrderItem();
 			Cart cart = cartList.get(i);
 			Product product = productService.getProduct(cart.getPid());
-			//Èç¹û¹ºÂòÊıÁ¿´óÓÚ¿â´æ£¬ÏÂµ¥Ê§°Ü
+			//å¦‚æœè´­ä¹°æ•°é‡å¤§äºåº“å­˜ï¼Œä¸‹å•å¤±è´¥
 			if(cart.getBuyNum() > product.getPnum()) {
-				String msg = product.getName() + "¿â´æ²»×ã£¬½öÊ£Óà" + product.getPnum() + "¼ş,ÇëÖØĞÂÏÂµ¥";
+				String msg = product.getName() + "åº“å­˜ä¸è¶³ï¼Œä»…å‰©ä½™" + product.getPnum() + "ä»¶,è¯·é‡æ–°ä¸‹å•";
 				session.setAttribute("orderMsg", msg);
 				return "redirect:/cart/getCart";
 			}
@@ -69,7 +69,7 @@ public class OrderController {
 		orderService.addOrder(order);
 		List<OrderInfo> orderInfos = orderService.findOrders(user_id);
 		model.addAttribute("orderInfos", orderInfos);
-		return "order_list";
+		return "redirect: toOrder";
 	}
 	
 	@RequestMapping(value="/toOrder", method=RequestMethod.GET)
@@ -89,5 +89,15 @@ public class OrderController {
 		List<OrderInfo> orderInfos = orderService.findOrders(user_id);
 		model.addAttribute("orderInfos", orderInfos);
 		return "order_list";
+	}
+	
+	@RequestMapping(value="/updateOrder", method=RequestMethod.GET)
+	public String updateOrder(String id, HttpSession session, Model model) {
+		orderService.updatePayState(1, id);
+		User user = (User)session.getAttribute("user");
+		Integer user_id = user.getId();
+		List<OrderInfo> orderInfos = orderService.findOrders(user_id);
+		model.addAttribute("orderInfos", orderInfos);
+		return "redirect: toOrder";
 	}
 }

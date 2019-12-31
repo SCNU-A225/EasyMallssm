@@ -13,4 +13,5 @@ public interface OrderService {
 	public void deleteOrder(String order_id);
 	public List<OrderInfo> getAllOrderInfo();
 	public List<Order> getAllOrders();
+	public int updatePayState(Integer paystate, String id);
 }

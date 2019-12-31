@@ -4,5 +4,6 @@ encoding//WebContent/WEB-INF/jsp/admin_login.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/admin_order_list.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/admin_product_add.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/admin_product_list.jsp=UTF-8
-encoding//WebContent/WEB-INF/jsp/admin_user_list.jsp=UTF-8
 encoding//WebContent/WEB-INF/jsp/admin_welcome.jsp=UTF-8
+encoding//src/com/controller/AdminController.java=UTF-8
+encoding/<project>=UTF-8

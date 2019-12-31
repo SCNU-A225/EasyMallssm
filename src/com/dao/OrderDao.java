@@ -3,6 +3,7 @@ package com.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.po.Order;
@@ -18,4 +19,6 @@ public interface OrderDao {
 	public void deleteOrderItem(String order_id);
 	public void deleteOrder(String order_id);
 	public List<Order> getAllOrders();
+	public int updatePayState(@Param("paystate")Integer paystate, @Param("id")String id);
+	public Order getOrderById(String order_id);
 }

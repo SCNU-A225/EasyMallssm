@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/xadmin.css">
     <script src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
     <script type="text/javascript" src="${pageContext.request.contextPath}/js/xadmin.js"></script>
+    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
     <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
     <!--[if lt IE 9]>
             <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -27,8 +28,8 @@
         <div class="layui-row">
             <form class="layui-form layui-form-pane" id="productForm">
                 <div class="layui-form-item">
-                    <label for="name" class="layui-form-label">订单编号</label>
-                    <div class="layui-input-block"><input type="text" id="name" name="name" readonly class="layui-input" value="cessd发的说法三"></div>
+                    <label for="id" class="layui-form-label">订单编号</label>
+                    <div class="layui-input-block"><input type="text" id="id" name="id" readonly class="layui-input" value=""></div>
                 </div>
                 <div class="layui-form-item">
                     <label for="username" class="layui-form-label">所属用户</label>
@@ -39,44 +40,62 @@
                     <div class="layui-input-block"><input type="text" id="money" name="money" readonly class="layui-input" value=""></div>
                 </div>
                 <div class="layui-form-item">
-                    <label for="address" class="layui-form-label">收货地址</label>
-                    <div class="layui-input-block"><input type="text" id="address" name="address" readonly class="layui-input" value=""></div>
+                    <label for="receiverinfo" class="layui-form-label">收货地址</label>
+                    <div class="layui-input-block"><input type="text" id="receiverinfo" name="receiverinfo" readonly class="layui-input" value=""></div>
                 </div>
                 <div class="layui-form-item">
                     <label for="state" class="layui-form-label">订单状态</label>
                     <div class="layui-input-block"><input type="text" id="state" name="state" readonly class="layui-input" value=""></div>
                 </div>
-                <table width="1200" border="0" cellpadding="0"
-				cellspacing="1" style="background:#d8d8d8;color:#333333">
-				<tr>
-					<th width="276" height="30" align="center" valign="middle" bgcolor="#f3f3f3">商品图片</th>
-					<th width="247" align="center" valign="middle" bgcolor="#f3f3f3">商品名称</th>
-					<th width="231" align="center" valign="middle" bgcolor="#f3f3f3">商品单价</th>
-					<th width="214" align="center" valign="middle" bgcolor="#f3f3f3">购买数量</th>
-					<th width="232" align="center" valign="middle" bgcolor="#f3f3f3">总价</th>
-				</tr>
-				<c:forEach items="${ orderInfo.list }" var="entry">
-					<tr>
-						<td align="center" valign="middle" bgcolor="#FFFFFF">
-							<img src="${pageContext.request.contextPath }/${entry.product.imgurl}" width="90" height="105">
-						</td>
-						<td align="center" valign="middle" bgcolor="#FFFFFF">${ entry.product.name }</td>
-						<td align="center" valign="middle" bgcolor="#FFFFFF">${ entry.product.price }元</td>
-						<td align="center" valign="middle" bgcolor="#FFFFFF">${ entry.buynum }件</td>
-						<td align="center" valign="middle" bgcolor="#FFFFFF">${ entry.product.price * entry.buynum }元</td>
-					</tr>
-				</c:forEach>
-			</table>
+                <div class="layui-form-item">
+                    <label for="ordertime" class="layui-form-label">下单时间</label>
+                    <div class="layui-input-block"><input type="text" id="ordertime" name="ordertime" readonly class="layui-input" value=""></div>
+                </div>
+                <table class="layui-table" lay-filter="items">
+                	<thead>
+                		<tr>
+                			<th>商品图片</th>
+                			<th>商品名称</th>
+                			<th>商品单价</th>
+                			<th>购买数量</th>
+                			<th>总价</th>
+                		</tr>
+                	</thead>
+                	<tbody id="items">
+                	
+                	</tbody>
+                </table>
             </form>
         </div>
     </div>
     <script>
-        layui.use(['form', 'layer'],
+        layui.use(['form', 'table'],
             function () {
-                $ = layui.jquery;
-                var form = layui.form,
+                var form = layui.form;
+                var table = layui.table;
 
-               
+                var data = parent.detailInfo;
+                console.log(data);
+               	$("#id").val(data.id);
+               	$("#username").val(data.username);
+               	$("#money").val(data.money);
+               	$("#receiverinfo").val(data.receiverinfo);
+               	$("#state").val(data.state);
+               	$("#ordertime").val(data.ordertime);
+               	
+               	var html = '';
+               	for(each of data.orderitems){
+               		html += `<tr>
+                                <td><img src="${pageContext.request.contextPath }/${"${each.product.imgurl}"}" width="90" height="105"></td>
+                                <td>${"${each.product.name}"}</td>
+                                <td>${"${each.product.price}"}元</td>
+                                <td>${"${each.buynum}"}件</td>
+                                <td>${"${each.product.price * each.buynum}"}元</td>
+                            </tr>`;
+               	}
+                $('#items').html(html)
+                
+                
             });
     </script>
 </body>

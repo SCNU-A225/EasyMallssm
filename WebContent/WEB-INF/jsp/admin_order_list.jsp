@@ -1,6 +1,5 @@
 ﻿<!DOCTYPE html>
 <html class="x-admin-sm">
-    
     <head>
         <meta charset="UTF-8">
         <title>EasyMall后台</title>
@@ -24,13 +23,6 @@
                                     <input class="layui-input" placeholder="开始日" name="start" id="start" autocomplete="off"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
                                     <input class="layui-input" placeholder="截止日" name="end" id="end" autocomplete="off"></div>
-                                <div class="layui-input-inline layui-show-xs-block">
-                                    <select name="contrller">
-                                        <option>支付方式</option>
-                                        <option>支付宝</option>
-                                        <option>微信</option>
-                                        <option>货到付款</option></select>
-                                </div>
                                 <div class="layui-input-inline layui-show-xs-block">
                                     <select name="contrller">
                                         <option value="">订单状态</option>
@@ -65,6 +57,7 @@
     </script>
 
     <script>
+    var detailInfo = null;
     layui.use(['laydate','form','table'],function(){
         var form = layui.form;
         var table = layui.table;
@@ -87,14 +80,13 @@
             tableData.push({
                 id: each.order.id,
                 username: each.username,
+                money: each.order.money,
                 receiverinfo: each.order.receiverinfo,
                 state: stateMap[each.order.paystate],
                 ordertime: new Date(each.order.ordertime).Format("yyyy-MM-dd  hh:mm:ss"),
                 orderitems: each.list
             })
         }
-        console.log(tableData)
-        
 
         table.render({
                 elem: '#orderTable'
@@ -102,15 +94,64 @@
                 ,cols: [[
                     {field:'id', title: '订单ID'}
                     ,{field:'username', title: '用户名'}
+                    ,{field:'money', title: '金额', sort: true}
                     ,{field:'receiverinfo', title: '收货地址'}
-                    ,{field:'state', title: '状态'}
+                    ,{field:'state', title: '状态', sort: true}
                     ,{field:'ordertime', title: '下单时间'}
                     ,{title: '操作', toolbar: '#optionsBar'}
                 ]]
                 ,data: tableData
                 ,page: true
             });
-    });
+        
+	    table.on('tool(orderTable)', function(obj){ //注：tool是工具条事件名，test是table原始容器的属性 lay-filter="对应的值"
+	        var data = obj.data; //获得当前行数据
+	        var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
+	        if(layEvent == 'deliver'){ //删除
+	        	deliver_order(data.id,data.state);
+	        } else if(layEvent=='detail'){
+	        	detailInfo = data;
+	        	xadmin.open('商品详情','${pageContext.request.contextPath}/admin/orderdetail',900,600)
+	        }
+	    });
+        
+	    function deliver_order(id,state) {
+	    	if(state==stateMap[0]){
+	    		layer.confirm('该订单未支付！无法发货');
+	    	}
+	    	else if(state==stateMap[2]){
+	    		layer.confirm('该订单已发货！无需发货');
+	    	}
+	    	else{
+	            layer.confirm('确认要发货吗？',
+	            function(index) {
+	            	$.ajax({
+	                    method:'GET',
+	                    url:'${pageContext.request.contextPath}/admin/updatePayState',
+	                    data:"id="+id,
+	                    success:function(res){
+	                    	res = JSON.parse(res)
+	                    	if(res.code==200){
+	                        	layer.msg('已发货!', {
+	                                icon: 1,
+	                                time: 1000
+	                            });
+	                        	location.reload();
+	                    	} else {
+	                    		layer.alert("发货失败", {icon: 2});
+	                    	}
+	                    },
+	                    error:function(xhr,err){
+	                    	layer.alert("发货失败", {icon: 2});
+	                    }
+	                })
+	            });
+	    	}
+        }
+        
+	    });
+    
+	    
     </script>
 
 </html>
