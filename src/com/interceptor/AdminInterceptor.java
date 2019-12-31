@@ -14,10 +14,10 @@ public class AdminInterceptor implements HandlerInterceptor {
 			throws Exception {
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
-		if(user!=null && user.getNickname().equals("³¬¼¶¹ÜÀíÔ±")) {
+		if(user!=null && user.getNickname().equals("è¶…çº§ç®¡ç†å‘˜")) {
 			return true;
 		}
-		request.setAttribute("msg", "ÇëÏÈµÇÂ¼");
+		request.setAttribute("msg", "è¯·å…ˆç™»å½•");
 		request.getRequestDispatcher("/WEB-INF/jsp/admin_login.jsp").forward(request, response);
 		return false;
 	}

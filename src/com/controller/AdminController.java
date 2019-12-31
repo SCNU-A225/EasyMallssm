@@ -41,25 +41,25 @@ public class AdminController {
 	@Autowired
 	private OrderService orderService;
 	
-	//½øÈëºóÌ¨µÇÂ¼Ò³Ãæ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½Â¼Ò³ï¿½ï¿½
 	@RequestMapping(value="/tologin", method=RequestMethod.GET)
 	public String toLogin() {
 		return "admin_login";
 	}
 	
-	//½øÈëºóÌ¨Ö÷Ò³
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Ì¨ï¿½ï¿½Ò³
 	@RequestMapping(value = "/index")
 	public String index(){
 		return "admin_index";
 	}
 	
-	//½øÈëÌí¼ÓÉÌÆ·Ò³Ãæ
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·Ò³ï¿½ï¿½
 	@RequestMapping(value="/toprodadd")
 	public String toProductUpdate() {
 		return "admin_product_add";
 	}
 	
-	//½øÈë»¶Ó­Ò³Ãæ
+	//ï¿½ï¿½ï¿½ë»¶Ó­Ò³ï¿½ï¿½
 	@RequestMapping(value="/welcome")
 	public String welcome(Model model) {
 		model.addAttribute("usernum", userService.getUserList().size());
@@ -68,7 +68,7 @@ public class AdminController {
 		return "admin_welcome";
 	}
 	
-	//¹ÜÀíÔ±µÇÂ¼
+	//ï¿½ï¿½ï¿½ï¿½Ô±ï¿½ï¿½Â¼
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(String username, String password,HttpSession session) {
 		User user = new User();
@@ -89,7 +89,7 @@ public class AdminController {
 		return "redirect: tologin";
 	}
 	
-	//»ñÈ¡ÉÌÆ·ÁÐ±í
+	//ï¿½ï¿½È¡ï¿½ï¿½Æ·ï¿½Ð±ï¿½
 	@RequestMapping(value="/prodlist", method=RequestMethod.GET )
 	public String productList(Model model) {
 		List<Product> prodlist = productService.getAll();
@@ -98,7 +98,7 @@ public class AdminController {
 		return "admin_product_list";
 	}
 	
-	//»ñÈ¡ÓÃ»§ÁÐ±í
+	//ï¿½ï¿½È¡ï¿½Ã»ï¿½ï¿½Ð±ï¿½
 	@RequestMapping(value="/userlist",method=RequestMethod.GET)
 	public String userList(Model model) {
 		List<User> userlist = userService.getUserList();
@@ -107,7 +107,7 @@ public class AdminController {
 		return "admin_user_list";
 	}
 	
-	//»ñÈ¡¶©µ¥ÐÅÏ¢ÁÐ±í
+	//ï¿½ï¿½È¡ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ï¢ï¿½Ð±ï¿½
 	@RequestMapping(value="/orderlist",method=RequestMethod.GET)
 	public String orderInfoList(Model model) {
 		List<OrderInfo> infolist = orderService.getAllOrderInfo();
@@ -116,7 +116,7 @@ public class AdminController {
 		return "admin_order_list";
 	}
 	
-	//ÉÏ´«Í¼Æ¬£¬·µ»Ø´æ´¢Â·¾¶
+	//ï¿½Ï´ï¿½Í¼Æ¬ï¿½ï¿½ï¿½ï¿½ï¿½Ø´æ´¢Â·ï¿½ï¿½
 	@RequestMapping(value="/uploadimg",method=RequestMethod.POST)
 	@ResponseBody
 	public String uploadimg(@RequestParam(value="file", required = true) MultipartFile file, HttpServletRequest request) {
@@ -145,7 +145,7 @@ public class AdminController {
 		return	jsonString;
 	}
 	
-	//Ìí¼ÓÉÌÆ·
+	//ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 	@RequestMapping(value="/addproduct",method=RequestMethod.POST)
 	@ResponseBody
 	public String addProduct(Product product,HttpServletResponse response) {
@@ -155,7 +155,7 @@ public class AdminController {
 		return "{\"code\":200}";
 	}
 	
-	//É¾³ýÉÌÆ·
+	//É¾ï¿½ï¿½ï¿½ï¿½Æ·
 	@RequestMapping(value="/delproduct",method=RequestMethod.POST)
 	@ResponseBody
 	public String delProduct(@RequestParam String id) {
@@ -164,7 +164,7 @@ public class AdminController {
 		return "{\"code\":200}";
 	}
 	
-	//¸üÐÂÉÌÆ·
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ·
 	@RequestMapping(value="/updateprod",method=RequestMethod.POST)
 	public void updateProd(Product product,HttpServletResponse response) {
 		productService.updateProd(product);
@@ -173,5 +173,16 @@ public class AdminController {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@RequestMapping(value="/updatePayState",method=RequestMethod.GET)
+	@ResponseBody
+	public String updatePayState(String id, HttpSession session, Model model) {
+		orderService.updatePayState(2, id);
+		User user = (User)session.getAttribute("user");
+		Integer user_id = user.getId();
+		List<OrderInfo> orderInfos = orderService.findOrders(user_id);
+		model.addAttribute("orderInfos", orderInfos);
+		return "{\"code\":200}";
 	}
 }
