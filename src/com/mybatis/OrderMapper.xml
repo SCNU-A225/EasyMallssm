@@ -46,5 +46,9 @@
 	<delete id="deleteOrder" parameterType="String">
 		delete from orders where id=#{order_id}
 	</delete>
+	
+	<update id="updatePayState" >
+		update orders set paystate = #{paystate} where id=#{id}
+	</update>
 
 </mapper>

@@ -32,13 +32,13 @@
 							<font color="red">未支付</font>&nbsp;&nbsp;
 						</c:if>
 						<c:if test="${ orderInfo.order.paystate == 1 }">
-							<font color="blue">已支付</font>&nbsp;&nbsp;
+							<font color="green">已支付</font>&nbsp;&nbsp;
 						</c:if>
 							<a href="${pageContext.request.contextPath }/order/deleteOrder?id=${ orderInfo.order.id }">
 								<img src="${pageContext.request.contextPath }/img/orderList/sc.jpg" width="69" height="19"/>
 							</a>
 							&nbsp;
-					 		<a href="#"> 
+					 		<a href="${pageContext.request.contextPath }/order/updateOrder?id=${ orderInfo.order.id }"> 
 						 		<img src="${pageContext.request.contextPath }/img/orderList/zx.jpg" width="69" height="19">
 							</a>
 							<br /> 

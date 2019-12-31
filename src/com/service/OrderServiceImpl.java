@@ -76,6 +76,11 @@ public class OrderServiceImpl implements OrderService{
 	public List<Order> getAllOrders() {
 		return orderDao.getAllOrders();
 	}
+
+	@Override
+	public void updatePayState(Integer paystate, String id) {
+		orderDao.updatePayState(paystate, id);
+	}
 	
 
 }

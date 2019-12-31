@@ -90,4 +90,14 @@ public class OrderController {
 		model.addAttribute("orderInfos", orderInfos);
 		return "order_list";
 	}
+	
+	@RequestMapping(value="/updateOrder", method=RequestMethod.GET)
+	public String updateOrder(String id, HttpSession session, Model model) {
+		orderService.updatePayState(1, id);
+		User user = (User)session.getAttribute("user");
+		Integer user_id = user.getId();
+		List<OrderInfo> orderInfos = orderService.findOrders(user_id);
+		model.addAttribute("orderInfos", orderInfos);
+		return "order_list";
+	}
 }
