@@ -52,7 +52,10 @@
                             <button class="layui-btn layui-btn-danger" onclick="delAll()">
                                 <i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加商品','${pageContext.request.contextPath}/admin/toprodadd',500,600)">
-                                <i class="layui-icon"></i>添加</button></div>
+                                <i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="location.reload()" style="float: right;">
+                                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>刷新</button>
+                        </div>
                         <div class="layui-card-body ">
                             <table id="productTable" class="layui-table layui-form" lay-filter="productTable"></table>
                         </div>
@@ -104,7 +107,6 @@
                 var layEvent = obj.event; //获得 lay-event 对应的值（也可以是表头的 event 参数对应的值）
                 if(layEvent == 'delete'){ //删除
                 	product_del(obj,data.id);
-                	alert(data.id);
                 }
             });
 
@@ -131,12 +133,14 @@
         function product_del(obj, id) {
             layer.confirm('确认要删除吗？',
             function(index) {
+                alert(id);
             	$.ajax({
                     method:'POST',
-                    url:`${pageContext.request.contextPath}/admin/delproduct`,
-                    data:`id=${id}`,
+                    url:'${pageContext.request.contextPath}/admin/delproduct',
+                    data:"id="+id,
                     success:function(res){
                     	res = JSON.parse(res)
+                    	console.log(res);
                     	if(res.code==200){
                     		obj.del();
                         	layer.msg('已删除!', {

@@ -9,7 +9,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import org.apache.tools.ant.taskdefs.Exit;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -20,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.po.OrderInfo;
 import com.po.Product;
 import com.po.User;
@@ -103,7 +101,8 @@ public class AdminController {
 	@RequestMapping(value="/userlist",method=RequestMethod.GET)
 	public String userList(Model model) {
 		List<User> userlist = userService.getUserList();
-		model.addAttribute("userlist", userlist);
+		String data = gson.toJson(userlist);
+		model.addAttribute("userlist", data);
 		return "admin_user_list";
 	}
 	
@@ -157,7 +156,8 @@ public class AdminController {
 	//É¾³ýÉÌÆ·
 	@RequestMapping(value="/delproduct",method=RequestMethod.POST)
 	@ResponseBody
-	public String delProduct(String id) {
+	public String delProduct(@RequestParam String id) {
+		System.out.println(id);
 		productService.delProduct(id);
 		return "{\"code\":200}";
 	}
