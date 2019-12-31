@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dao.OrderDao;
+import com.dao.UserDao;
 import com.po.Order;
 import com.po.OrderInfo;
 import com.po.OrderItem;
@@ -16,6 +17,9 @@ public class OrderServiceImpl implements OrderService{
 	
 	@Autowired
 	private OrderDao orderDao;
+	
+	@Autowired
+	private UserDao userDao;
 
 	@Override
 	public void addOrder(Order order) {
@@ -61,6 +65,8 @@ public class OrderServiceImpl implements OrderService{
 			OrderInfo orderInfo = new OrderInfo();
 			Order order = orders.get(i);
 			List<OrderItem> orderItems = orderDao.findOrderItems(order.getId());
+			String username = userDao.getUserName(order.getUser_id());
+			orderInfo.setUsername(username);
 			orderInfo.setOrder(order);
 			orderInfo.setList(orderItems);
 			orderInfos.add(orderInfo);

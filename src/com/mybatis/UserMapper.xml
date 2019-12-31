@@ -33,4 +33,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	<select id="getUserList" resultType="com.po.User">
 		select * from user
 	</select>
+	
+	<!-- 获取用户名 -->
+	<select id="getUserName" parameterType="Integer" resultType="String">
+		select username from user where id=#{id}
+	</select>
 </mapper>

@@ -3,6 +3,7 @@ package com.po;
 import java.util.List;
 
 public class OrderInfo {
+	private String username;
 	private Order order;
 	private List<OrderItem> list;
 	public Order getOrder() {
@@ -16,6 +17,12 @@ public class OrderInfo {
 	}
 	public void setList(List<OrderItem> list) {
 		this.list = list;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
 	}
 	
 }
