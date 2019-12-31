@@ -52,7 +52,10 @@
                             <button class="layui-btn layui-btn-danger" onclick="delAll()">
                                 <i class="layui-icon"></i>批量删除</button>
                             <button class="layui-btn" onclick="xadmin.open('添加商品','${pageContext.request.contextPath}/admin/toprodadd',500,600)">
-                                <i class="layui-icon"></i>添加</button></div>
+                                <i class="layui-icon"></i>添加</button>
+                            <button class="layui-btn" onclick="location.reload()" style="float: right;">
+                                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>刷新</button>
+                        </div>
                         <div class="layui-card-body ">
                             <table id="productTable" class="layui-table layui-form" lay-filter="productTable"></table>
                         </div>

@@ -70,7 +70,7 @@
             <div id="side-nav">
                 <ul id="nav">
                 	<li>
-                        <a onclick="xadmin.add_tab('欢迎页','welcome.html">
+                        <a onclick="xadmin.add_tab('欢迎页','${pageContext.request.contextPath}/admin/welcome')">
                             <i class="iconfont left-nav-li" lay-tips="欢迎页">&#xe6b4;</i>
                             <cite>欢迎页</cite>
                         </a>
@@ -82,7 +82,7 @@
                             <i class="iconfont nav_right">&#xe697;</i></a>
                         <ul class="sub-menu">
                             <li>
-                                <a onclick="xadmin.add_tab('用户列表','member-list.html')">
+                                <a onclick="xadmin.add_tab('用户列表','${pageContext.request.contextPath}/admin/userlist')">
                                     <i class="iconfont">&#xe6a7;</i>
                                     <cite>用户列表</cite></a>
                             </li>
