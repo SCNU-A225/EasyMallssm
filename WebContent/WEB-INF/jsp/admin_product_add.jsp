@@ -67,7 +67,6 @@
                     </div>
                     <input type="text" name="imgurl" id="imgurl" class="layui-hide" />
 				</div> 
-                </div>
                 	
                 <div class="layui-form-item">
                     <div class="layui-input-block">

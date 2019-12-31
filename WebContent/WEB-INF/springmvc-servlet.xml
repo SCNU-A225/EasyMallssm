@@ -46,5 +46,10 @@
 			<mvc:mapping path="/order/*"/>
 			<bean class="com.interceptor.LoginInterceptor"/>
 		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/*"/>
+			<mvc:exclude-mapping path="/admin/login"/> 
+			<bean class="com.interceptor.AdminInterceptor"/>
+		</mvc:interceptor>
 	</mvc:interceptors>
 </beans>

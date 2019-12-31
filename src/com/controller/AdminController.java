@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.google.gson.Gson;
+import com.po.Order;
 import com.po.OrderInfo;
 import com.po.Product;
 import com.po.User;
@@ -109,8 +110,9 @@ public class AdminController {
 	//获取订单信息列表
 	@RequestMapping(value="/orderlist",method=RequestMethod.GET)
 	public String orderInfoList(Model model) {
-		List<OrderInfo> orderinfolist = orderService.getAllOrderInfo();
-		model.addAttribute("orderinfolist", orderinfolist);
+		List<OrderInfo> infolist = orderService.getAllOrderInfo();
+		String data = gson.toJson(infolist);
+		model.addAttribute("infolist", data);
 		return "admin_order_list";
 	}
 	
