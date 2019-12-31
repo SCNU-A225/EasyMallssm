@@ -14,17 +14,6 @@
     </head>
     
     <body>
-        <div class="x-nav">
-            <span class="layui-breadcrumb">
-                <a href="">首页</a>
-                <a href="">演示</a>
-                <a>
-                    <cite>导航元素</cite></a>
-            </span>
-            <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right" onclick="location.reload()" title="刷新">
-                <i class="layui-icon layui-icon-refresh" style="line-height:30px"></i>
-            </a>
-        </div>
         <div class="layui-fluid">
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
@@ -32,9 +21,9 @@
                         <div class="layui-card-body ">
                             <form class="layui-form layui-col-space5">
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input class="layui-input" placeholder="开始日" name="start" id="start"></div>
+                                    <input class="layui-input" placeholder="开始日" name="start" id="start" autocomplete="off"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input class="layui-input" placeholder="截止日" name="end" id="end"></div>
+                                    <input class="layui-input" placeholder="截止日" name="end" id="end" autocomplete="off"></div>
                                 <div class="layui-input-inline layui-show-xs-block">
                                     <select name="contrller">
                                         <option>支付方式</option>
@@ -45,26 +34,22 @@
                                 <div class="layui-input-inline layui-show-xs-block">
                                     <select name="contrller">
                                         <option value="">订单状态</option>
-                                        <option value="0">待确认</option>
-                                        <option value="1">已确认</option>
-                                        <option value="2">已收货</option>
-                                        <option value="3">已取消</option>
-                                        <option value="4">已完成</option>
-                                        <option value="5">已作废</option></select>
+                                        <option value="0">未支付</option>
+                                        <option value="1">已支付，待发货</option>
+                                        <option value="2">已发货</option>
+                                    </select>
                                 </div>
                                 <div class="layui-input-inline layui-show-xs-block">
-                                    <input type="text" name="username" placeholder="请输入订单号" autocomplete="off" class="layui-input"></div>
+                                    <input type="text" name="username" placeholder="请输入订单ID" autocomplete="off" class="layui-input">
+                                </div>
                                 <div class="layui-input-inline layui-show-xs-block">
                                     <button class="layui-btn" lay-submit="" lay-filter="sreach">
                                         <i class="layui-icon">&#xe615;</i></button>
                                 </div>
+                                <button class="layui-btn" onclick="location.reload()" type="button" style="float: right;">
+                                		<i class="layui-icon layui-icon-refresh"></i>刷新</button>
                             </form>
                         </div>
-                        <div class="layui-card-header">
-                            <button class="layui-btn layui-btn-danger" onclick="delAll()">
-                                <i class="layui-icon"></i>批量删除</button>
-                            <button class="layui-btn" onclick="xadmin.open('添加用户','./order-add.html',800,600)">
-                                <i class="layui-icon"></i>添加</button></div>
                         <div class="layui-card-body ">
                             <table id="orderTable" class="layui-table layui-form" lay-filter="orderTable"></table>
                         </div>
@@ -73,6 +58,12 @@
             </div>
         </div>
     </body>
+
+    <script id="optionsBar">
+        <button type="button" class="layui-btn" lay-event="detail">详情</button>
+        <button type="button" class="layui-btn layui-btn-warm" lay-event="deliver">发货</button>
+    </script>
+
     <script>
 
     /*
@@ -83,24 +74,47 @@
         private Timestamp ordertime;
         private int user_id;
     */
-    layui.use(['form','table'],function(){
+    layui.use(['laydate','form','table'],function(){
         var form = layui.form;
         var table = layui.table;
+        var laydate = layui.laydate;
         
-        var infoList = "${infolist}";
+      	//执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+        
+        var infoList = JSON.parse(`${infolist}`);
+        var stateMap = ['未支付','已支付，待发货','已发货'];
         var tableData = [];
-        tableData.push({
-            id: infoList.order.id,
-            
-        })
+        for(each of infoList){
+            tableData.push({
+                id: each.order.id,
+                username: each.username,
+                receiverinfo: each.order.receiverinfo,
+                state: stateMap[each.order.paystate],
+                ordertime: new Date(each.order.ordertime).Format("yyyy-MM-dd  hh:mm:ss"),
+                orderitems: each.list
+            })
+        }
+        console.log(tableData)
+        
 
         table.render({
                 elem: '#orderTable'
                	,cellMinWidth: 20
                 ,cols: [[
-                	{type:'checkbox'}
-                    ,{field:'order.id', title: '订单ID'}
-                    
+                    {field:'id', title: '订单ID'}
+                    ,{field:'username', title: '用户名'}
+                    ,{field:'receiverinfo', title: '收货地址'}
+                    ,{field:'state', title: '状态'}
+                    ,{field:'ordertime', title: '下单时间'}
+                    ,{title: '操作', toolbar: '#optionsBar'}
                 ]]
                 ,data: tableData
                 ,page: true

@@ -39,8 +39,6 @@ public class OrderServiceImpl implements OrderService{
 			OrderInfo orderInfo = new OrderInfo();
 			Order order = orders.get(i);
 			List<OrderItem> orderItems = orderDao.findOrderItems(order.getId());
-			String username = userDao.getUserName(order.getUser_id());
-			orderInfo.setUsername(username);
 			orderInfo.setOrder(order);
 			orderInfo.setList(orderItems);
 			orderInfos.add(orderInfo);
@@ -67,6 +65,8 @@ public class OrderServiceImpl implements OrderService{
 			OrderInfo orderInfo = new OrderInfo();
 			Order order = orders.get(i);
 			List<OrderItem> orderItems = orderDao.findOrderItems(order.getId());
+			String username = userDao.getUserName(order.getUser_id());
+			orderInfo.setUsername(username);
 			orderInfo.setOrder(order);
 			orderInfo.setList(orderItems);
 			orderInfos.add(orderInfo);
