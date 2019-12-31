@@ -68,6 +68,11 @@ public class AdminController {
 		return "admin_welcome";
 	}
 	
+	@RequestMapping(value = "/orderdetail")
+	public String orderDetail() {
+		return "admin_order_detail";
+	}
+	
 	//π‹¿Ì‘±µ«¬º
 	@RequestMapping(value="/login", method=RequestMethod.POST)
 	public String login(String username, String password,HttpSession session) {

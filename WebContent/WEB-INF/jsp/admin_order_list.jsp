@@ -65,15 +65,6 @@
     </script>
 
     <script>
-
-    /*
-        private String id;
-        private double money;
-        private String receiverinfo;
-        private int paystate;
-        private Timestamp ordertime;
-        private int user_id;
-    */
     layui.use(['laydate','form','table'],function(){
         var form = layui.form;
         var table = layui.table;

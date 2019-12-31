@@ -133,7 +133,6 @@
         function product_del(obj, id) {
             layer.confirm('确认要删除吗？',
             function(index) {
-                alert(id);
             	$.ajax({
                     method:'POST',
                     url:'${pageContext.request.contextPath}/admin/delproduct',

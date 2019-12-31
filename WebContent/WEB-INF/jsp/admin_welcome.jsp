@@ -10,6 +10,7 @@
 	    <link rel="stylesheet" href="${pageContext.request.contextPath}/css/admin/xadmin.css">
 	    <script src="${pageContext.request.contextPath}/lib/layui/layui.js" charset="utf-8"></script>
 	    <script type="text/javascript" src="${pageContext.request.contextPath}/js/xadmin.js"></script>
+	    <script type="text/javascript" src="${pageContext.request.contextPath}/js/jquery-3.4.1.min.js"></script>
         <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
         <!--[if lt IE 9]>
           <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
@@ -22,8 +23,8 @@
                 <div class="layui-col-md12">
                     <div class="layui-card">
                         <div class="layui-card-body ">
-                            <blockquote class="layui-elem-quote">欢迎管理员：
-                                <span class="x-red">${sessionScope.user.username}</span>！当前时间:2018-04-25 20:50:53
+                            <blockquote class="layui-elem-quote">
+                                欢迎管理员：<span class="x-red">${sessionScope.user.username}</span>！当前时间:<span id="time"></span>
                             </blockquote>
                         </div>
                     </div>
@@ -126,6 +127,9 @@
                     <blockquote class="layui-elem-quote layui-quote-nm">感谢 layui, jquery, x-admin</blockquote></div>
             </div>
         </div>
-        </div>
+        <script>
+           var time = $("#time");
+           time.html(new Date().Format("yyyy-MM-dd hh:mm:ss"))
+        </script>
     </body>
 </html>
