@@ -1,4 +1,4 @@
-package com.controller;
+ï»¿package com.controller;
 
 
 import javax.servlet.http.HttpSession;
@@ -34,31 +34,31 @@ public class UserController {
 					     @RequestParam String nickname,
 					     @RequestParam String email,Model model) {
 		if(username == null || "".equals(username)){
-			model.addAttribute("msg","ÓÃ»§Ãû²»ÄÜÎª¿Õ£¡");
+			model.addAttribute("msg","ç”¨æˆ·åä¸èƒ½ä¸ºç©ºï¼");
 			return "regist";
 		}
 		if(password == null || "".equals(password)){
-			model.addAttribute("msg","ÃÜÂë²»ÄÜÎª¿Õ£¡");
+			model.addAttribute("msg","å¯†ç ä¸èƒ½ä¸ºç©ºï¼");
 			return "regist";
 		}
 		if(password2 == null || "".equals(password2)){
-			model.addAttribute("msg","È·ÈÏÃÜÂë²»ÄÜÎª¿Õ£¡");
+			model.addAttribute("msg","ç¡®è®¤å¯†ç ä¸èƒ½ä¸ºç©ºï¼");
 			return "regist";
 		}
 		if(!password.equals(password2)){
-			model.addAttribute("msg", "Á½´ÎÃÜÂëÊäÈë²»Ò»ÖÂ");
+			model.addAttribute("msg", "ä¸¤æ¬¡å¯†ç è¾“å…¥ä¸ä¸€è‡´");
 			return "regist";
 		}
 		if(nickname == null || "".equals(nickname)){
-			model.addAttribute("msg","êÇ³Æ²»ÄÜÎª¿Õ£¡");
+			model.addAttribute("msg","æ˜µç§°ä¸èƒ½ä¸ºç©ºï¼");
 			return "regist";
 		}
 		if(email == null || "".equals(email)){
-			model.addAttribute("msg","ÓÊÏäµØÖ·²»ÄÜÎª¿Õ£¡");
+			model.addAttribute("msg","é‚®ç®±åœ°å€ä¸èƒ½ä¸ºç©ºï¼");
 			return "regist";
 		}
 		if(!email.matches("^\\w+@\\w+(\\.\\w+)+$")){
-			model.addAttribute("msg", "ÓÊÏäµØÖ·¸ñÊ½´íÎó");
+			model.addAttribute("msg", "é‚®ç®±åœ°å€æ ¼å¼é”™è¯¯");
 			return "regist";
 		}
 		
@@ -70,12 +70,12 @@ public class UserController {
 		
 		User exited = userService.selectUserByUsername(user);
 		if(exited != null) {
-			model.addAttribute("msg", "ÓÃ»§ÃûÒÑ´æÔÚ");
+			model.addAttribute("msg", "ç”¨æˆ·åå·²å­˜åœ¨");
 			return "regist";
 		}
 		
 		userService.regist(user);
-		model.addAttribute("m", "×¢²á³É¹¦£¬È¥µÇÂ¼");
+		model.addAttribute("m", "æ³¨å†ŒæˆåŠŸï¼Œå»ç™»å½•");
 //		return "forward:/index.jsp";
 		return "regist";
 	}
@@ -83,11 +83,11 @@ public class UserController {
 	@RequestMapping(value="/login", method = RequestMethod.POST)
 	public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
 		if(username == null || "".equals(username)){
-			model.addAttribute("msg","ÓÃ»§Ãû²»ÄÜÎª¿Õ£¡");
+			model.addAttribute("msg","ç”¨æˆ·åä¸èƒ½ä¸ºç©ºï¼");
 			return "login";
 		}
 		if(password == null || "".equals(password)){
-			model.addAttribute("msg","ÃÜÂë²»ÄÜÎª¿Õ£¡");
+			model.addAttribute("msg","å¯†ç ä¸èƒ½ä¸ºç©ºï¼");
 			return "login";
 		}
 		User user = new User();
@@ -96,11 +96,11 @@ public class UserController {
 		User result = userService.login(user);
 		if(result != null) {
 			session.setAttribute("user", result);
-			//Èç¹ûÊÇ¹ÜÀíÔ±µÇÂ¼£¬½øÈëºóÌ¨
+			//å¦‚æœæ˜¯ç®¡ç†å‘˜ç™»å½•ï¼Œè¿›å…¥åå°
 //			if(user.getUsername().equals("admin")) return "redirect:/admin/login";
 			return "redirect:/index/toIndex";
 		}else {
-			model.addAttribute("msg","ÓÃ»§Ãû»òÃÜÂë´íÎó");
+			model.addAttribute("msg","ç”¨æˆ·åæˆ–å¯†ç é”™è¯¯");
 			return "login";
 		}
 	}

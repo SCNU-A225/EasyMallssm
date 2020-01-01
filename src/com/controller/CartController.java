@@ -1,4 +1,4 @@
-package com.controller;
+ï»¿package com.controller;
 
 import java.util.List;
 
@@ -26,13 +26,13 @@ public class CartController {
 	private CartService cartService;
 	
 	/**
-	 * Ç°Ì¨ÓÃ»§µÇÂ¼È¨ÏŞ¿ØÖÆ£¬´¦Àí·½·¨Ö´ĞĞÇ°Ö´ĞĞ¸Ã·½·¨
+	 * å‰å°ç”¨æˆ·ç™»å½•æƒé™æ§åˆ¶ï¼Œå¤„ç†æ–¹æ³•æ‰§è¡Œå‰æ‰§è¡Œè¯¥æ–¹æ³•
 	 * @throws UserLoginNoException 
 	 */
 //	@ModelAttribute  
 //    public void isLogin(HttpSession session) throws UserLoginNoException {      
 //       if(session.getAttribute("user") == null){  
-//            throw new UserLoginNoException("Ã»ÓĞµÇÂ¼");
+//            throw new UserLoginNoException("æ²¡æœ‰ç™»å½•");
 //       }  
 //    } 
 
@@ -41,7 +41,7 @@ public class CartController {
 	public String add(String buyNum, String pid, HttpSession session, Model model) {
 		User user = (User)session.getAttribute("user");
 		Cart cart = cartService.getCartById(user.getId(), pid);
-		//ÅĞ¶ÏÉÌÆ·ÊÇ·ñÒÑ¾­´æÔÚ¹ºÎï³µ
+		//åˆ¤æ–­å•†å“æ˜¯å¦å·²ç»å­˜åœ¨è´­ç‰©è½¦
 		if(cart != null) {
 			cartService.updateByCid(cart.getId(), cart.getBuyNum() + Integer.parseInt(buyNum));
 		}else {
@@ -51,7 +51,7 @@ public class CartController {
 			cart.setBuyNum(Integer.parseInt(buyNum));
 			cartService.add(cart);
 		}
-		//»ñÈ¡ÓÃ»§¹ºÎï³µ£¬×ªµ½¹ºÎï³µÒ³Ãæ
+		//è·å–ç”¨æˆ·è´­ç‰©è½¦ï¼Œè½¬åˆ°è´­ç‰©è½¦é¡µé¢
 		List<Cart> cartList = cartService.getCart(user.getId());
 		model.addAttribute("cartList",cartList);
 		return "cart";
@@ -60,7 +60,7 @@ public class CartController {
 	@RequestMapping(value="/getCart", method=RequestMethod.GET)
 	public String getCart(HttpSession session, Model model) {
 		User user = (User)session.getAttribute("user");
-		//ÅĞ¶ÏÊÇ·ñÓĞÏÂµ¥Ê§°ÜµÄÏûÏ¢
+		//åˆ¤æ–­æ˜¯å¦æœ‰ä¸‹å•å¤±è´¥çš„æ¶ˆæ¯
 		String orderMsg = (String)session.getAttribute("orderMsg");
 		if(orderMsg !=null) {
 			model.addAttribute("orderMsg", orderMsg);
@@ -71,13 +71,13 @@ public class CartController {
 		return "cart";
 	}
 	
-	//cart.jsp Ôö¼õ¸üĞÂµ÷ÓÃ
+	//cart.jsp å¢å‡æ›´æ–°è°ƒç”¨
 	@RequestMapping(value="/updateByCid", method=RequestMethod.POST)
 	public void updateByCid(Integer id, Integer buyNum) {
 		cartService.updateByCid(id, buyNum);
 	}
 	
-	//¸ù¾İidÉ¾³ı¹ºÎï³µÌõÄ¿
+	//æ ¹æ®idåˆ é™¤è´­ç‰©è½¦æ¡ç›®
 	@RequestMapping(value="/deleteById", method=RequestMethod.POST)
 	public void deleteById(Integer id) {
 		cartService.deleteById(id);

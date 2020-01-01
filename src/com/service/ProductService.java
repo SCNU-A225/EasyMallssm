@@ -1,11 +1,11 @@
-package com.service;
+ï»¿package com.service;
 
 import java.util.List;
 
 import com.po.Product;
 
 public interface ProductService {
-	//Ìõ¼ş²éÑ¯
+	//æ¡ä»¶æŸ¥è¯¢
 	public List<Product> getList(String name, String category, Double minPrice, Double maxPrice);
 	
 	public List<Product> getAll();

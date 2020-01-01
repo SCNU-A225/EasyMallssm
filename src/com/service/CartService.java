@@ -1,4 +1,4 @@
-package com.service;
+ï»¿package com.service;
 
 import java.util.List;
 
@@ -9,15 +9,15 @@ public interface CartService {
 	
 	public void add(Cart cart);
 	
-	//»ñÈ¡ÓÃ»§ËùÓĞ¹ºÎï³µÌõÄ¿
+	//è·å–ç”¨æˆ·æ‰€æœ‰è´­ç‰©è½¦æ¡ç›®
 	public List<Cart> getCart(Integer uid);
 	
-	//Í¨¹ıid¸üĞÂbuyNum
+	//é€šè¿‡idæ›´æ–°buyNum
 	public void updateByCid(Integer id, Integer buyNum);
 	
-	//Í¨¹ıuid,pid»ñÈ¡¹ºÎï³µÌõÄ¿
+	//é€šè¿‡uid,pidè·å–è´­ç‰©è½¦æ¡ç›®
 	public Cart getCartById(Integer uid, String pid);
 	
-	//¸ù¾İidÉ¾³ıÌõÄ¿
+	//æ ¹æ®idåˆ é™¤æ¡ç›®
 	public void deleteById(Integer id);
 }

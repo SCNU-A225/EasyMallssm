@@ -1,4 +1,4 @@
-package com.dao;
+ï»¿package com.dao;
 
 import java.util.List;
 
@@ -14,15 +14,15 @@ import com.po.Product;
 public interface CartDao {
 	public void add(Cart cart);
 	
-	//»ñÈ¡ÓÃ»§¹ºÎï³µÌõÄ¿
+	//è·å–ç”¨æˆ·è´­ç‰©è½¦æ¡ç›®
 	public List<Cart> getCart(Integer uid);
 	
-	//¸ù¾İid¸üĞÂbuyNum
+	//æ ¹æ®idæ›´æ–°buyNum
 	public void updateByCid(@Param("id") Integer id,@Param("buyNum") Integer buyNum);
 	
-	//¸ù¾İuid,pid²éÕÒ
+	//æ ¹æ®uid,pidæŸ¥æ‰¾
 	public Cart getCartById(@Param("uid") Integer uid, @Param("pid") String pid);
 	
-	//¸ù¾İidÉ¾³ıÌõÄ¿
+	//æ ¹æ®idåˆ é™¤æ¡ç›®
 	public void deleteById(Integer id);
 } 

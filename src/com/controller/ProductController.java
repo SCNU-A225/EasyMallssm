@@ -1,4 +1,4 @@
-package com.controller;
+锘縫ackage com.controller;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class ProductController {
 	@Autowired
 	private ProductService productService;
 	
-	//根据条件查询
+	//鏍规嵁鏉′欢鏌ヨ
 	@RequestMapping(value = "/getList", method = RequestMethod.POST)
 	public String getList(String name, String category, Double minprice, Double maxprice, Model model) {
 		if(name == null || "".equals(name)) name = null;
@@ -42,12 +42,12 @@ public class ProductController {
 		return "prod_info";
 	}
 	
-	/**>手机数码</a></li>>电脑平板</a></li>>家用电器</a></li>汽车用品</a></li>食品饮料</a>图书杂志</a>服装服饰</a>理财产品</a></li>
+	/**>鎵嬫満鏁扮爜</a></li>>鐢佃剳骞虫澘</a></li>>瀹剁敤鐢靛櫒</a></li>姹借溅鐢ㄥ搧</a></li>椋熷搧楗枡</a>鍥句功鏉傚織</a>鏈嶈鏈嶉グ</a>鐞嗚储浜у搧</a></li>
 	 */
 	@RequestMapping(value = "/getCategory", method=RequestMethod.GET)
 	public String getCategory(String c, Model model) {
 		int num = Integer.parseInt(c);
-		String[] categorys = {"电子数码","电脑平板","家用电器","日用百货","食品饮料","图书杂志","服装服饰","床上用品"};
+		String[] categorys = {"鐢靛瓙鏁扮爜","鐢佃剳骞虫澘","瀹剁敤鐢靛櫒","鏃ョ敤鐧捐揣","椋熷搧楗枡","鍥句功鏉傚織","鏈嶈鏈嶉グ","搴婁笂鐢ㄥ搧"};
 		List<Product> list = productService.getCategory(categorys[num]);
 		model.addAttribute("list", list);
 		return "prod_list";
