@@ -19,14 +19,6 @@ public class UserController {
 	@Autowired
 	private UserService userService;
 	
-//	@RequestMapping("/select")
-//	public String select(User user, Model model){		
-//		List<User> list = userService.selectUserByUsername(user);
-//		model.addAttribute("userList",list);
-//	//	return "/WEB-INF/jsp/userList.jsp";
-//		return "userList";
-//	}
-	
 	@RequestMapping(value="/regist", method = RequestMethod.POST)
 	public String regist(@RequestParam String username, 
 					     @RequestParam String password,
@@ -75,9 +67,7 @@ public class UserController {
 		}
 		
 		userService.regist(user);
-		model.addAttribute("m", "注册成功，去登录");
-//		return "forward:/index.jsp";
-		return "regist";
+		return "redirect:/index/login";
 	}
 
 	@RequestMapping(value="/login", method = RequestMethod.POST)
@@ -96,8 +86,6 @@ public class UserController {
 		User result = userService.login(user);
 		if(result != null) {
 			session.setAttribute("user", result);
-			//如果是管理员登录，进入后台
-//			if(user.getUsername().equals("admin")) return "redirect:/admin/login";
 			return "redirect:/index/toIndex";
 		}else {
 			model.addAttribute("msg","用户名或密码错误");
